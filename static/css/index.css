@@ -1,18 +1,35 @@
+
+/* imports text used on webpage */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@900&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Lato:100&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
 
 
- #mood-graphic
-{
+/* style of mood-graphic div (gradient results) */
+ #mood-graphic {
+ align-items: center;
  width: 100%;
  height: 100%;
- padding: 0px;
  margin: 0px;
+ display: flex;
+ padding-left: 50; 
 }  
 
+/* style of mood result text (Determined mood: Sad/Happy/Energetic etc */
+#mood-print {
+  font-family: century gothic;
+  font-size: 30px;
+  line-height: 30px;
+  font-weight: bold;
+  color: white;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
 
-
-@keyframes animated-border{
+/* Border on mood-graphic animation around Key/Track Results */
+@keyframes animated-border {
   0% {
     box-shadow: 0 0 0 0 rgba(255,255,255,0.4);
   }
@@ -21,8 +38,8 @@
   }
 }
 
+/* Background toggles between Key and Results when the button See Why? is pressed */
 .background {
-  
   background-image: url("/static/img/key4.jpg");
 }
 
@@ -37,19 +54,69 @@
 .results.toggle {
   visibility: visible;
 }
+
+/* Style of Button "See Why?" */
 #button{
+  font-size: 13;
   position: absolute;
-  left: 145px;
-  top: 530px;
-  color: black;
+  left: 160px;
+  top: 580px;
+  color: white;
   animation: glow 1.5s linear infinite;
   border-color: #ffffff;
-  /* color: #fff; */
   box-shadow: 0 0 15px yellow, 0 0 25px yellow;
   -webkit-transition: all 150ms ease-in-out;
   transition: all 150ms ease-in-out;
 }
 
+.btn:hover, .btn:focus {
+  color: #fff;
+  outline: 0;
+}
+
+.two {
+  color: yellow;
+  text-shadow: 0 0 15px yellow, 0 0 25px yellow;
+  animation: glow 1.5s linear infinite;
+  border-color: #ffffff;
+  /* color: #fff; */
+  box-shadow: 0 0 10px 10px #4f4b42, 0 0 0 0 #4f4b42;
+  -webkit-transition: all 150ms ease-in-out;
+  transition: all 150ms ease-in-out;
+}
+.two:hover {
+  box-shadow: 0 0 10px 0 #ffffff inset, 0 0 10px 4px #ffffff;
+}
+
+/* Style of Button "Search Again" */
+#buttonBack{
+  font-size: 8px;
+  position: absolute;
+  left: 30px;
+  top: -1px; 
+  color: white;
+  animation: glow 1.5s linear infinite;
+  border-color: #ffffff;
+  box-shadow: 0 0 15px yellow, 0 0 25px yellow;
+  -webkit-transition: all 150ms ease-in-out;
+  transition: all 150ms ease-in-out;
+}
+
+.fourth {
+  color: yellow;
+  text-shadow: 0 0 15px yellow, 0 0 25px yellow;
+  animation: glow 1.5s linear infinite;
+  border-color: #ffffff;
+  color: #fff;
+  box-shadow: 0 0 10px 10px #4f4b42, 0 0 0 0 #4f4b42; 
+  -webkit-transition: all 150ms ease-in-out;
+  transition: all 150ms ease-in-out;
+}
+.fourth:hover {
+  box-shadow: #ffffff;
+}
+
+/* Style of track data results */
 #mood-results{
   font-family: century gothic;
   font-size: 20px;
@@ -59,7 +126,10 @@
   background-color: transparent;
 }
 
+/* Style of border on moodgraphic */
 #song-results {
+  justify-content: center;
+  display: flex;
   background-size: 300px 600px;
   animation: animated-border 1.5s infinite;
   font-family: century gothic;
@@ -75,7 +145,7 @@
   height: 600px;
 }
   
-
+/* Style of forum */
 #track_search_input {
   margin: 0 auto;
   display: block;
@@ -83,9 +153,9 @@
   height: 20px;
   display: flex;
   justify-content: center;
-  
 }
 
+/* Style of album covers */
 #search_results{
   width: 100%;
   display: flex;
@@ -94,12 +164,10 @@
   position: relative;
   display: flex;
   justify-content: center;
-  height: 400px;
   padding-left: 100px;
 }
 
 #track_search{
-  /* justify-content: center; */
   margin: auto;
   position: relative;
   display: flex;
@@ -108,17 +176,16 @@
   height: 400px;
 }
 
+/* Position of MOODTUNES letters */
 #letters{
-  /* justify-content: center;
-  display: flex; */
   margin: -1 auto;
   position: relative; 
   display: flex;
   justify-content: center;
   flex-direction: column;
-  
 }
 
+/* style of submit button */
 #submit {
   margin:  auto;
   display: block;
@@ -128,7 +195,6 @@
 #select-track {
   margin:  auto;
   display: block;
-  
 }
 
 
@@ -143,6 +209,7 @@
   align-items: center;
 }
 
+/* MoodTunes letter positioning */
 ul {
   position: relative;
   display: flex;
@@ -165,7 +232,8 @@ input[type="checkbox"] {
   z-index: 100;
 }
 
-div #letter {
+/* positioning of MOODTUNES letters */
+div .letter {
   position: relative;
   height: 80px;
   width: 80px;
@@ -180,6 +248,7 @@ div #letter {
   
 }
 
+/* response to click on MOODTUNES letters */
 input[type="checkbox"]:checked ~ div {
   /* box-shadow: inset 0 0 2px rgba(255, 255, 255, 0.05),
     inset 4px 4px 6px rgba(0, 0, 0, 0.2); */
@@ -188,6 +257,7 @@ input[type="checkbox"]:checked ~ div {
   animation: glow 1.5s linear infinite;
 }
 
+/* glow animation of MOODTUNES letters */
 @keyframes glow {
   0% {
     filter: hue-rotate(0deg);
@@ -197,7 +267,7 @@ input[type="checkbox"]:checked ~ div {
   }
 }
 
-
+/* Submit button style */
 .btn {
   box-sizing: border-box;
   -webkit-appearance: none;
@@ -226,6 +296,8 @@ input[type="checkbox"]:checked ~ div {
   font-family: 'Montserrat', sans-serif;
   font-weight: 700;
 }
+
+/* Submit button hover */
 .btn:hover, .btn:focus {
   color: #fff;
   outline: 0;

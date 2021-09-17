@@ -1,4 +1,5 @@
 
+// global variables - track data pulled from API 
 let popularity;
 let length;
 let danceability;
@@ -14,7 +15,7 @@ let key;
 let time_signature;
 
 
-
+// list of color arrays - gradient color arrays that define a certain "Mood"
 var colors = new Array(
     [62, 35, 255],
     [60, 255, 60],
@@ -92,6 +93,9 @@ var colorsExuberant = new Array(
     [252, 70, 106],
 
 )
+
+// function that determines which mood color array is picked (determined by tracks energy/valence)
+// also prints the "Mood" to be printed on webpage
 
 function determineMood(res) {
 
@@ -184,10 +188,9 @@ function determineMood(res) {
 
 
 
-//AJAX GET to get new colors 
-// create a route for json -> GET on route -> Array of Arrays on backend (RGB)
 
 let step = 0;
+
 //color table indices for: 
 // current color left
 // next color left
@@ -195,9 +198,10 @@ let step = 0;
 // next color right
 const colorIndices = [0, 1, 2, 3];
 
-//transition speed
+// gradient transition speed
 const gradientSpeed = 0.002;
 
+// function that updates color gradient allowing it to move through the colors in the array 
 function updateGradient(colors) {
 
     if ($ === undefined) return;
@@ -218,6 +222,7 @@ function updateGradient(colors) {
     let b2 = Math.round(istep * c1_0[2] + step * c1_1[2]);
     let color2 = "rgb(" + r2 + "," + g2 + "," + b2 + ")";
 
+    // applies the gradient to css 
     $('#mood-graphic').css({
         background: "-webkit-gradient(linear, left top, right top, from(" + color1 + "), to(" + color2 + "))"
     }).css({
@@ -238,59 +243,68 @@ function updateGradient(colors) {
     }
 }
 
-//   setInterval(updateGradient(color),10);
+
 
 
 
 $(document).ready(() => {
 
-    // alert('Javascript loaded'); 
-
+    //Homepage color array for MOODTUNES letters 
+    let colors = ['#b3ffa6', '#a6ffde', '#a6d1ff', '#aea3ff','#e6ffa6', '#fff5a6', '#ffd5a6', '#ffb0a6', '#c5a6ff', '#fea6ff', '#ffa6c1'];
+    // let colors = ['#c501e1', '#9a27f8', '#6564ff', '#2b97fb','#02c4e7', '#16e6cc', '#2ff8a0', '#68ff6c', '#c6e501', '#e7c501', '#ff6b63', '#f82d98', '#e730ce'];
+   
+    //Generates random color at the start of each letter to cycle through 
+    let color = colors[Math.floor(Math.random() * colors.length)];
+    const letters = document.querySelectorAll('.letter')
+    for (const l of letters) {
+        let color = colors[Math.floor(Math.random() * colors.length)];
+        l.style.color = color;
+        l.style.textShadow = `0 0 15px ${color}, 0 0 25px ${color}`;
+    }
+  
+    // jQuery click event on submit to search the input of the forum
     $('#track_search').on('submit', (event) => {
-        // results of song search on submit
+
+        // prevents default
         event.preventDefault();
-        // default_display_state()
+
         // refresh with new search
         $('#search_results').empty();
 
         const data = { "name": $("#track_search_input").val() };
-        console.log("hi hi hi hereeeee");
+        
+        // Sends post request and recieves top 5 search responses
         $.post('/track_api.json', data, (response) => {
             // Loop through JSON response data from Spotify API
-            console.log("hi hi hi hi ");
+            
             console.log(response);
+
             // empty song search dict
             const track_data = {};
 
             for (const element of response) {
 
                 $('#search_results').append(
-                    // make id the value            
+                    // assigns element track id and displays the top 5 track album covers of the search             
                     `
                     <div padding-left= 100px display= 'inline-block'>
-                    
-
                         <img  src=' ${element.track_img}' type="button"  name="select_song" id="${element.track_id}"
                         width="200" height="200">
-                         
-                        <label id="${element.track_uri}" for="${element.track_name}"> 
-                        
-                        </label>       
-
+                        <label id="${element.track_uri}" for="${element.track_name}"> </label>       
                     </div>
                     `);
                   
-            
-
+                // jQuery on click event... displays moodgraphic 
                 $(`#${element.track_id}`).on('click', () => {
-                    console.log('hi im in here');
-                    // default_display_state()
+                    
+                    // removes search results elements from HTML
                     $('#search_results').remove();
                     $('#select-track').remove();
                     $('#track_search').remove();
-                    // $('body').append('<section id = "mood-graphic"> </section>');
+                    $('body').append('<section id = "mood-graphic"> </section>');
+
+                    // Pulls the track data from the seclected track
                     $.get(`/selectedTrack/${element.track_id}`, (res) => {
-                        console.log('now inside get request');
                        
                         loudness = res.loudness;
                         danceability = res.danceability;
@@ -299,22 +313,15 @@ $(document).ready(() => {
                         tempo = res.tempo;
                         time_signature = res.time_signature;
 
-                        
-
-                        console.log(res);
+                        //Returns track data values from Spotify API along with selected color gradient Array onto moodgraphic HTML
                         $('#mood-graphic').html(
-                            // make id the value   
-                            
-                            `
-                            <p id='mood-print'></p>
-                            
-                            <div id= song-results class= background toggle >
+                            ` <div id= song-results class= background toggle >
 
                                     <div class= results >
                                         <br>
-                                        <br>
-                                        <br>
                                         <p> ${res.name} - ${res.artist} </p>
+                                        <br>
+                                        <p id= mood-print></p> 
                                         <br>
                                         <p> DANCEABLITY: ${res.danceability} </p>
                                         <p> VALENCE: ${res.valence} </p>
@@ -324,38 +331,28 @@ $(document).ready(() => {
                                         <p> TIME SIGNATURE: ${res.time_signature} </p>
                                     </div>
 
-                                    <button id=button type="button">
+                                    <button id=button class="btn two" type="button">
                                         See Why?
                                     </button>
+                                    
+                                    <button id = buttonBack class="btn fourth" onClick="window.location.reload();">Search Again</button>
+                                    
+                                    
                             </div>`);
                             
                         const color = determineMood(res);
-
-
                         setInterval(function () { updateGradient(color); }, 10);
                                
                             $("#button").on("click", (evt) => {
                                 evt.preventDefault();
-                
                                 $('.background').toggleClass('toggle');
                                 $('.results').toggleClass('toggle'); 
 
                             });
-
-                       
-                    });
-
-                  
+                    }); 
                 });
-
-
             }
-
         });
-
     });
-
-
-
 });
 
