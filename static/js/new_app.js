@@ -250,7 +250,8 @@ function updateGradient(colors) {
 $(document).ready(() => {
 
     //Homepage color array for MOODTUNES letters 
-    let colors = ['#b3ffa6', '#a6ffde', '#a6d1ff', '#aea3ff','#e6ffa6', '#fff5a6', '#ffd5a6', '#ffb0a6', '#c5a6ff', '#fea6ff', '#ffa6c1'];
+    // let colors = ['#b3ffa6', '#a6ffde', '#a6d1ff', '#aea3ff','#e6ffa6', '#fff5a6', '#ffd5a6', '#ffb0a6', '#c5a6ff', '#fea6ff', '#ffa6c1'];
+    let colors = ['#ff7230', '#ff7230', '#ffc430', '#ffc430','#b7ff30', '#b7ff30', '#30ff78', '#30ff78', '#30ffcb', '#30ffcb', '#309bff', '#ffd5a6', '#309bff', '#7830ff','#a142f5','#a142f5','#f5ef42','#f59e42'];
     // let colors = ['#c501e1', '#9a27f8', '#6564ff', '#2b97fb','#02c4e7', '#16e6cc', '#2ff8a0', '#68ff6c', '#c6e501', '#e7c501', '#ff6b63', '#f82d98', '#e730ce'];
    
     //Generates random color at the start of each letter to cycle through 
@@ -334,7 +335,7 @@ $(document).ready(() => {
                                     <button id=button class="btn two" type="button">
                                         See Why?
                                     </button>
-                                    
+
                                     <button id = buttonBack class="btn fourth" onClick="window.location.reload();">Search Again</button>
                                     
                                     

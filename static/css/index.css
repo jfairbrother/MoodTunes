@@ -40,11 +40,11 @@
 
 /* Background toggles between Key and Results when the button See Why? is pressed */
 .background {
-  background-image: url("/static/img/key4.jpg");
+  background-image: url("/static/img/background.png");
 }
 
 .background.toggle {
-  background-image: url("/static/img/key3.jpg");
+  background-image: url("/static/img/background2.png");
 }
 
 .results{
