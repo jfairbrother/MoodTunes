@@ -10,6 +10,9 @@ This project was built with python, jquery, ajax, css, and html while pulling in
 
 # Demo 
 
+Play around with the application yourself: 
+www.moodtunes.art
+
 [Click Here To View Demo Video](https://www.youtube.com/watch?v=uLIeZLqDHLw)
 
 # About the Engineer
